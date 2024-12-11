@@ -56,6 +56,7 @@
 ]; */
 
 // Main function to retrieve and display a new joke
+
 async function getAndDisplayNewJoke() {
   const joke = await retrieveJoke();
   //console.log(joke);
@@ -65,12 +66,14 @@ async function getAndDisplayNewJoke() {
 // Function to retrieve a random joke
 async function retrieveJoke() {
   const response = await fetch("https://icanhazdadjoke.com/", {
-    headers: {"accept": "application/json"}
+    headers: { accept: "application/json" },
   });
   const json = await response.json();
-  //console.log(json)
-  return json
-  
+  const historyJoke = document.getElementById("joke-history-class");
+  let listItem = document.createElement("li");
+  listItem.innerHTML = json.joke;
+  historyJoke.appendChild(listItem);
+  return json;
   /* const randomIndex = Math.floor(Math.random() * jokes.length);
   return jokes[randomIndex]; */
 }
@@ -90,8 +93,7 @@ const newJokeButton = document.getElementById("newJokeBtn");
 // Sets up a click event listener to fetch and display a new joke upon clicking the newJokeButton.
 newJokeButton.addEventListener("click", getAndDisplayNewJoke);
 
-
-//keep the display joke function as it is 
+//keep the display joke function as it is
 //keep all the event listeners the same - might need to tweak slightly to accomodate change of variables
 //retrieve joke function should be a get api call instead
 
@@ -105,3 +107,7 @@ newJokeButton.addEventListener("click", getAndDisplayNewJoke);
 }
 
 testAPI(); */
+
+// create our Array
+// when api is called, push joke string to array
+// set History section = array
