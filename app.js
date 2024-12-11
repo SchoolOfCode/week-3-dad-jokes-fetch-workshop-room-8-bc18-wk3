@@ -111,3 +111,21 @@ testAPI(); */
 // create our Array
 // when api is called, push joke string to array
 // set History section = array
+
+// create Night Mode Button in HTML 
+// add event handler for button click
+const nightModeButton = document.getElementById("nightModeBtn");
+nightModeButton.addEventListener("click", toggleNightMode )
+
+
+// #01172e background
+// #504a65 container
+// #e9ecef9f cards
+
+// create function to handle style change
+function toggleNightMode() {
+  console.log("Check")
+  
+}
+// create night mode styles
+// button click should toggle button to 'Day Mode' and switch back
