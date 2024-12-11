@@ -1,6 +1,6 @@
 // Hardcoded array of joke objects
 // Each joke object has a unique id
-const jokes = [
+/* const jokes = [
   {
     id: "A1bC2D",
     joke: "My dog used to chase people on a bike a lot. It got so bad I had to take his bike away.",
@@ -53,18 +53,26 @@ const jokes = [
     id: "E1yH6B",
     joke: "What did the grape say when it got stepped on? Nothing, it just let out a little wine!",
   },
-];
+]; */
 
 // Main function to retrieve and display a new joke
-function getAndDisplayNewJoke() {
-  const joke = retrieveJoke();
+async function getAndDisplayNewJoke() {
+  const joke = await retrieveJoke();
+  //console.log(joke);
   displayJoke(joke);
 }
 
 // Function to retrieve a random joke
-function retrieveJoke() {
-  const randomIndex = Math.floor(Math.random() * jokes.length);
-  return jokes[randomIndex];
+async function retrieveJoke() {
+  const response = await fetch("https://icanhazdadjoke.com/", {
+    headers: {"accept": "application/json"}
+  });
+  const json = await response.json();
+  //console.log(json)
+  return json
+  
+  /* const randomIndex = Math.floor(Math.random() * jokes.length);
+  return jokes[randomIndex]; */
 }
 
 // Function to update the DOM with the provided joke
@@ -81,3 +89,19 @@ const newJokeButton = document.getElementById("newJokeBtn");
 
 // Sets up a click event listener to fetch and display a new joke upon clicking the newJokeButton.
 newJokeButton.addEventListener("click", getAndDisplayNewJoke);
+
+
+//keep the display joke function as it is 
+//keep all the event listeners the same - might need to tweak slightly to accomodate change of variables
+//retrieve joke function should be a get api call instead
+
+/* async function testAPI() {
+  const response = await fetch("https://icanhazdadjoke.com/", {
+    headers: {"accept": "application/json"}
+  });
+  const json = await response.json();
+  const joke = json.joke
+  console.log(joke);
+}
+
+testAPI(); */
