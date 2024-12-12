@@ -73,6 +73,10 @@ async function retrieveJoke() {
   let listItem = document.createElement("li");
   listItem.innerHTML = json.joke;
   historyJoke.appendChild(listItem);
+  if (historyJoke.children.length === 4) {
+    const firstChild = historyJoke.firstElementChild;
+    historyJoke.removeChild(firstChild);
+  }
   return json;
   /* const randomIndex = Math.floor(Math.random() * jokes.length);
   return jokes[randomIndex]; */
@@ -122,10 +126,39 @@ nightModeButton.addEventListener("click", toggleNightMode )
 // #504a65 container
 // #e9ecef9f cards
 
+// #e9ecef background
+// #fff container
+// #e9ecef cards
+
 // create function to handle style change
+
+let isNightMode = false
+
 function toggleNightMode() {
-  console.log("Check")
-  
+  if (isNightMode === false) {
+    nightMode();
+  }
+  else {
+    dayMode();
+  }
+}
+
+function nightMode() {
+  document.body.style.backgroundColor = "#01172e";
+  document.getElementsByClassName("container")[0].style.backgroundColor = "#504a65";
+  document.getElementsByClassName("joke-card")[0].style.backgroundColor = "#e9ecef9f";
+  document.getElementsByClassName("joke-history-card")[0].style.backgroundColor = "#e9ecef9f";
+  nightModeButton.textContent = "Day Mode"
+  isNightMode = true
+}
+
+function dayMode() {
+  document.body.style.backgroundColor = "#e9ecef";
+  document.getElementsByClassName("container")[0].style.backgroundColor = "#fff";
+  document.getElementsByClassName("joke-card")[0].style.backgroundColor = "#e9ecef";
+  document.getElementsByClassName("joke-history-card")[0].style.backgroundColor = "#e9ecef";
+  nightModeButton.textContent = "Night Mode"
+  isNightMode = false
 }
 // create night mode styles
 // button click should toggle button to 'Day Mode' and switch back
